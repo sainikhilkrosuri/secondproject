@@ -30,7 +30,11 @@ SECRET_KEY = 'django-insecure-w86p0(_3vg!n@kta9ld0r&x3k2jpsdr#_d2&8%^x6abikicumm
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['*' if DEBUG else os.environ['WEBSITE_HOSTNAME']]
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', '')]
+
 CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
 
 
