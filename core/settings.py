@@ -14,28 +14,17 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+host = os.environ.get('WEBSITE_HOSTNAME', 'firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net')
 
-# SECURITY WARNING: keep the secret key used in production secret!
+ALLOWED_HOSTS = ['*'] if DEBUG else [host]
+CSRF_TRUSTED_ORIGINS = [f'https://{host}']
 
-SECRET_KEY = 'django-insecure-w86p0(_3vg!n@kta9ld0r&x3k2jpsdr#_d2&8%^x6abikicumm'
-#SECRET_KEY = os.environ['SECRET']
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-
-if DEBUG:
-    ALLOWED_HOSTS = ['*']
-else:
-    ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', 'https://firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net/')]
-
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'https://firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net/')]
+#CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net')]
 
 
 # Application definition
