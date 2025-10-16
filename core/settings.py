@@ -35,7 +35,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', '')]
 
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', '')]
 
 
 # Application definition
