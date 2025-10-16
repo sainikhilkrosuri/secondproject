@@ -33,9 +33,9 @@ DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', '')]
+    ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', 'https://firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net/')]
 
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', '')]
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'https://firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net/')]
 
 
 # Application definition
