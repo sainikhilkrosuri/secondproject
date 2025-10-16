@@ -17,6 +17,11 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+if not SECRET_KEY:
+    SECRET_KEY = 'django-insecure-w86p0(_3vg!n@kta9ld0r&x3k2jpsdr#_d2&8%^x6abikicumm'
+
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 host = os.environ.get('WEBSITE_HOSTNAME', 'firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net')
