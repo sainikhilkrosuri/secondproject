@@ -106,7 +106,7 @@ else:
             'OPTIONS': {
                 'driver': 'ODBC Driver 18 for SQL Server',
                 'Encrypt': 'yes',
-                'TrustServerCertificate': 'no',
+                'TrustServerCertificate': 'yes',
                 'Connection Timeout': 60,
             },
         }
