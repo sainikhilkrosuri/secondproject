@@ -98,6 +98,23 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'mssql',
+            'NAME': 'testing',
+            'USER': 'saikrosuri@myfirst-saikrosuri',
+            'PASSWORD': 'Sai@8900',
+            'HOST': 'myfirst-saikrosuri.database.windows.net',
+            'PORT': '1433',
+            'OPTIONS': {
+                'driver': 'ODBC Driver 18 for SQL Server',
+                'Encrypt': 'yes',
+                'TrustServerCertificate': 'no',
+                'Connection Timeout': 60,
+            },
+        }
+    }
+    '''
+    DATABASES = {
+        'default': {
+            'ENGINE': 'mssql',
             'NAME': os.getenv('AZURE_MYSQL_NAME'),
             'USER': os.getenv('AZURE_MYSQL_USER'),
             'PASSWORD': os.getenv('AZURE_MYSQL_PASSWORD'),
@@ -111,6 +128,7 @@ else:
             },
         }
     }
+    '''
 
 
 # Password validation
