@@ -23,7 +23,7 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 host = os.environ.get('WEBSITE_HOSTNAME', 'firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net')
 
-ALLOWED_HOSTS = ['*']#if DEBUG else [host]
+ALLOWED_HOSTS = ['*']if DEBUG else [host]
 CSRF_TRUSTED_ORIGINS = [f'https://{host}']
 
 #CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net')]
