@@ -97,12 +97,12 @@ if DEBUG:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
+            'ENGINE': 'mssql',
             'NAME': os.getenv('AZURE_MYSQL_NAME'),
             'USER': os.getenv('AZURE_MYSQL_USER'),
             'PASSWORD': os.getenv('AZURE_MYSQL_PASSWORD'),
             'HOST': os.getenv('AZURE_MYSQL_HOST'),
-            'PORT': '3306',
+            'PORT': '1433',
             'OPTIONS': {
                 'driver': 'ODBC Driver 18 for SQL Server',
                 'Encrypt': 'yes',
