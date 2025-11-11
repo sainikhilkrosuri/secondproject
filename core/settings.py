@@ -17,13 +17,21 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-w86p0(_3vg!n@kta9ld0r&x3k2jpsdr#_d2&8%^x6abikicumm'
-
-DEBUG = True
+#SECRET_KEY = 'django-insecure-w86p0(_3vg!n@kta9ld0r&x3k2jpsdr#_d2&8%^x6abikicumm'
+SECRET_KEY = os.environ.get('SECRET')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in ('1', 'true', 'yes')
 
 host = os.environ.get('WEBSITE_HOSTNAME', 'firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net')
 
-ALLOWED_HOSTS = ['*']if DEBUG else [host]
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    host = os.environ.get('WEBSITE_HOSTNAME', None)
+    if host:
+        ALLOWED_HOSTS = [host]
+    else:
+        ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', '')]
+
 CSRF_TRUSTED_ORIGINS = [f'https://{host}']
 
 #CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net')]
@@ -107,7 +115,7 @@ else:
                 'driver': 'ODBC Driver 18 for SQL Server',
                 'Encrypt': 'yes',
                 'TrustServerCertificate': 'no',
-                'Connection Timeout': 60,
+                'Connection Timeout': 30,
             },
         }
     }
@@ -147,21 +155,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 # Static files (CSS, JavaScript, Images)
-if DEBUG:
-    STATIC_URL = '/static/'
-    STATICFILES_DIR = os.path.join(BASE_DIR, '/static')
-else:
-    # Use django-storages for static too
-    STATIC_URL = '/static/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    pass
     
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+'''
 if DEBUG:
     MEDIA_URL = 'media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -172,3 +181,13 @@ else:
     AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY', '')
     AZURE_CONTAINER = 'media'
     MEDIA_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
+'''
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+    AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME', 'mediafilesstorage8900')
+    AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY', '')
+    AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER', 'media')
+    MEDIA_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
