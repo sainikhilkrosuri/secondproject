@@ -7,6 +7,7 @@ cffi==2.0.0
 charset-normalizer==3.4.3
 cryptography==46.0.1
 Django==4.2
+django-cors-headers==4.9.0
 django-storages==1.14.6
 gunicorn==23.0.0
 idna==3.10
@@ -19,6 +20,7 @@ pillow==11.3.0
 pycparser==2.23
 PyJWT==2.10.1
 pyodbc==5.2.0
+python-dotenv==1.1.1
 pytz==2025.2
 requests==2.32.5
 setuptools==80.9.0
