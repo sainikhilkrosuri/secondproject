@@ -4,14 +4,17 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+last_payload = {}
+
 @csrf_exempt
-def index(request):
-    context = {}
+def webhook(request):
+    global last_payload
     if request.method == "POST":
-        try:
-            req = json.loads(request.body)
-        except json.JSONDecodeError:
-            req = {"error": "Invalid JSON"}
-        context = {"a": req}
-    return render(request, "index.html", context)
+        payload = json.loads(request.body)
+        last_payload = payload
+        return JsonResponse({"status": "saved", "received": payload})
+    return JsonResponse({"info": "Send a POST request"})
+
+def index(request):
+    return render(request, "index.html", context={"a": last_payload})
 

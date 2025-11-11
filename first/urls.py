@@ -4,4 +4,5 @@ from .views import *
 
 urlpatterns = [
     path('', index, name = 'index'),
+    path('webhook/', webhook, name = 'webhook'),
 ]
