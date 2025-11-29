@@ -14,7 +14,7 @@ def webhook(request):
         last_payload = payload
         print("Success")
         return JsonResponse({"status": "saved", "received": payload})
-    return JsonResponse({"info": "Send a POST request"})
+    return JsonResponse({"info": "Send a POST request successfully."})
 
 def index(request):
     return render(request, "index.html", context={"a": last_payload})
