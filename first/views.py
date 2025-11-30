@@ -11,7 +11,7 @@ def webhook(request):
     global last_payload
     if request.method == "POST":
         payload = json.loads(request.body)
-        last_payload = payload
+        last_payload = request
         return JsonResponse({"status": "saved", "received": payload})
     return JsonResponse({"info": "Send a POST request successfully."})
 
