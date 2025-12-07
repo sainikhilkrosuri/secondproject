@@ -8,6 +8,7 @@ last_payload = {}
 
 @csrf_exempt
 def webhook(request):
+    secret_token = 'my_secret_token'
     global last_payload
     if request.method == "POST":
         payload = json.loads(request.body)
