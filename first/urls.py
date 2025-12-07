@@ -3,6 +3,6 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
-    path('', index, name = 'index'),
-    path('webhook/', webhook, name = 'webhook'),
+    path('https://firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net/', index, name = 'index'),
+    path('https://firstapptesting-hteuf3czeed2bzdu.centralus-01.azurewebsites.net/webhook/', webhook, name = 'webhook'),
 ]

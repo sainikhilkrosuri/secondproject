@@ -8,7 +8,6 @@ last_payload = {}
 
 @csrf_exempt
 def webhook(request):
-    secret_key = 'ajhfiaefghaehfsehf'
     global last_payload
     if request.method == "POST":
         payload = json.loads(request.body)
@@ -18,4 +17,8 @@ def webhook(request):
 
 def index(request):
     return render(request, "index.html", context={"a": last_payload})
+
+
+def new_port(request):
+    return HttpResponse("This is a new port page.")
 
