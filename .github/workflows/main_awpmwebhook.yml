@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - awpmwebhook
+name: Build and deploy Python app to Azure Web App - firstapptesting
 
 on:
   push:
@@ -28,10 +28,10 @@ jobs:
       # The following section in your workflow is designed to catch build issues early on the client side, before deployment. This can be helpful for debugging and validation. However, if this step significantly increases deployment time and early detection is not critical for your workflow, you may remove this section to streamline the deployment process.
       - name: Create and Start virtual environment and Install dependencies
         run: |
-          python -m venv antenv
-          source antenv/bin/activate
           pip install -r requirements.txt
-                
+
+      - name: Collect static
+        run: python manage.py collectstatic --noinput
       # By default, when you enable GitHub CI/CD integration through the Azure portal, the platform automatically sets the SCM_DO_BUILD_DURING_DEPLOYMENT application setting to true. This triggers the use of Oryx, a build engine that handles application compilation and dependency installation (e.g., pip install) directly on the platform during deployment. Hence, we exclude the antenv virtual environment directory from the deployment artifact to reduce the payload size. 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -63,14 +63,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_474E50E4B0944A8C8F180E04ABA2AA75 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_70739E4B4A3B442BB0ACE24E6B4DC9E0 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_28F237285C6B4353BFC1EAE5C82390C8 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1CF32DB3ED664E4DB4ADF0B63F41D07E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4807908044C345AAAF0126FAF7448F45 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8792DD3A17D947CDA1A96A417DCDDB40 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'awpmwebhook'
+          app-name: 'firstapptesting'
           slot-name: 'Production'
+
           
