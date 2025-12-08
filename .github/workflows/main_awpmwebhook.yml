@@ -45,7 +45,7 @@ jobs:
       # If you prefer to disable the Oryx build process during deployment, follow these steps:
       # 1. Remove the SCM_DO_BUILD_DURING_DEPLOYMENT app setting from your Azure App Service Environment variables.
       # 2. Refer to sample workflows for alternative deployment strategies: https://github.com/Azure/actions-workflow-samples/tree/master/AppService
-      
+         
 
   deploy:
     runs-on: ubuntu-latest
@@ -63,15 +63,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1CF32DB3ED664E4DB4ADF0B63F41D07E }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4807908044C345AAAF0126FAF7448F45 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8792DD3A17D947CDA1A96A417DCDDB40 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_474E50E4B0944A8C8F180E04ABA2AA75 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_70739E4B4A3B442BB0ACE24E6B4DC9E0 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_28F237285C6B4353BFC1EAE5C82390C8 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'firstapptesting'
+          app-name: 'awpmwebhook'
           slot-name: 'Production'
-
           
